@@ -11,7 +11,7 @@ namespace PorraGirona.Controllers
 {
     public class PuntuacionsController : Controller
     {
-        /* Modificat per Miquel Pou
+        /* Modificat per Miquel Pouu
         private readonly PostDbContext _context;
 
         public PuntuacionsController(PostDbContext context)
