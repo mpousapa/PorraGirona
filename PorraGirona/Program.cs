@@ -11,7 +11,6 @@ namespace PorraGirona
 {
     public class Program
     {
-        //Borja
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

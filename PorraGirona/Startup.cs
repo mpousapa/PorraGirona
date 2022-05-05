@@ -23,10 +23,19 @@ namespace PorraGirona
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Permetre sessions
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+            
             services.AddControllersWithViews();
 
             // Carregar la configuracio de la connexio a la BDD des del fitxer appsettings.json
             ConnectionStrings = Configuration["ConnectionStrings:PorraGironaWebContextConnection"];
+
+            services.AddControllersWithViews();
+            services.AddMvc(); //Afegit per funcionalitat Identitat
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +53,8 @@ namespace PorraGirona
 
             app.UseRouting();
 
+            app.UseAuthentication(); //Afegit per funcionalitat Identitat
+            app.UseSession(); //Permetre les sessions
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -51,8 +62,12 @@ namespace PorraGirona
                 endpoints.MapControllerRoute(
                     name: "default",
                     // pattern: "{controller=Home}/{action=Index}/{id?}");
-                    pattern: "{controller=Puntuacions}/{action=Index}/{id?}");
-            });
+                    //pattern: "{controller=Puntuacions}/{action=Index}/{id?}");
+                    //Afegit per carregar el Login inicialment
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();  //Afegit per funcionalitat Identitat
+        });
         }
     }
 }
