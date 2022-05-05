@@ -11,7 +11,7 @@ namespace PorraGirona
 {
     public class Program
     { 
-        // Pau
+        // Pauu
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
