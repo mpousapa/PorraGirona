@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,8 +29,8 @@ namespace PorraGirona
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
-            
-            services.AddControllersWithViews();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Carregar la configuracio de la connexio a la BDD des del fitxer appsettings.json
             ConnectionStrings = Configuration["ConnectionStrings:PorraGironaWebContextConnection"];
