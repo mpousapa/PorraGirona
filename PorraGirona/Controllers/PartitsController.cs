@@ -29,7 +29,7 @@ namespace PorraGirona.Controllers
         {
             //var postDbContext = _context.Partits.Include(p => p.IdequiplocalNavigation).Include(p => p.IdequipvisitantNavigation);
             //return View(await postDbContext.ToListAsync());
-            return View(await _context.Partits.ToListAsync());
+            return View(await _context.Partits.OrderBy(p => p.Jornada).ToListAsync());
         }
 
         // GET: Partits/Details/5
