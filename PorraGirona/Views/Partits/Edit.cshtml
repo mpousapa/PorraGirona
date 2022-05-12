@@ -1,0 +1,80 @@
+﻿@model PorraGirona.Models.Entity.Partit
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Partit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Idpartit" />
+            <div class="form-group">
+                <label asp-for="Idequiplocal" class="control-label"></label>
+                <select asp-for="Idequiplocal" class="form-control" asp-items="ViewBag.Idequiplocal"></select>
+                <span asp-validation-for="Idequiplocal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idequipvisitant" class="control-label"></label>
+                <select asp-for="Idequipvisitant" class="form-control" asp-items="ViewBag.Idequipvisitant"></select>
+                <span asp-validation-for="Idequipvisitant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Datainici" class="control-label"></label>
+                <input asp-for="Datainici" class="form-control" />
+                <span asp-validation-for="Datainici" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jornada" class="control-label"></label>
+                <input asp-for="Jornada" class="form-control" />
+                <span asp-validation-for="Jornada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Golslocal" class="control-label"></label>
+                <input asp-for="Golslocal" class="form-control" />
+                <span asp-validation-for="Golslocal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Golsvisitant" class="control-label"></label>
+                <input asp-for="Golsvisitant" class="form-control" />
+                <span asp-validation-for="Golsvisitant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Finalitzat" class="control-label"></label>
+                <input asp-for="Finalitzat" class="form-control" />
+                <span asp-validation-for="Finalitzat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Temporada" class="control-label"></label>
+                <input asp-for="Temporada" class="form-control" />
+                <span asp-validation-for="Temporada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idsjugadorslocal" class="control-label"></label>
+                <input asp-for="Idsjugadorslocal" class="form-control" />
+                <span asp-validation-for="Idsjugadorslocal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idsjugadorsvisitant" class="control-label"></label>
+                <input asp-for="Idsjugadorsvisitant" class="form-control" />
+                <span asp-validation-for="Idsjugadorsvisitant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

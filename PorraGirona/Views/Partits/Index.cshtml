@@ -1,0 +1,90 @@
+﻿@model IEnumerable<PorraGirona.Models.Entity.Partit>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Datainici)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jornada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Golslocal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Golsvisitant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Finalitzat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temporada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idsjugadorslocal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idsjugadorsvisitant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdequiplocalNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdequipvisitantNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datainici)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jornada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Golslocal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Golsvisitant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Finalitzat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temporada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idsjugadorslocal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idsjugadorsvisitant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdequiplocalNavigation.Idequip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdequipvisitantNavigation.Idequip)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Idpartit">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Idpartit">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Idpartit">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
