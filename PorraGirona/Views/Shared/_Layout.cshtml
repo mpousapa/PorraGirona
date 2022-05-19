@@ -1,21 +1,254 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PorraGirona</title>
+    <title>@ViewData["Title"] - PorraGironaWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+
+        /*
+            https://www.resultados-futbol.com/segunda2022/grupo1/calendario
+            https://www.resultados-futbol.com/segunda2022/grupo1/jugadores
+            https://www.resultados-futbol.com/segunda2022/grupo1/equipos
+
+            Paleta de colors
+                vermell super fosc 118;13;30, 	#760D1E
+                vermell fosc 202;15;44  		#CA0F2C
+                vermell mig 207;31;48 		#CF1F30
+                vermell clar 227;30;60		#E31E3C
+                groc 249;213;37			#F9D525
+            */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .titoldata {
+            font-size: 4vw;
+            color: white;
+        }
+
+        .contenidor {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .capcalera {
+            width: 100%;
+            float: left;
+            text-align: center;
+            color: white;
+            border: 2px solid yellow;
+            border-radius: 5px;
+            background-color: #CA0F2C;
+            margin-bottom: 2px;
+        }
+
+        .titolpronostic {
+            width: 100%;
+            text-align: center;
+            /*font-size: 1.2em;*/
+            font-size: 5vw;
+            color: white;
+        }
+
+        .left {
+            background-color: #CF1F30;
+            padding: 1%;
+            float: left;
+            width: 30%; /* The width is 20%, by default */
+        }
+
+        .main {
+            background-color: #CA0F2C;
+            padding: 5px;
+            float: left;
+            width: 40%; /* The width is 60%, by default */
+        }
+
+        .right {
+            background-color: #CF1F30;
+            padding: 1%;
+            float: left;
+            width: 30%; /* The width is 20%, by default */
+        }
+
+        .pronosticlocal {
+            width: 50%;
+            float: left;
+            background-color: #CA0F2C;
+            text-align: center;
+        }
+
+        .pronosticvisitant {
+            width: 50%;
+            float: left;
+            background-color: #CA0F2C;
+            text-align: center;
+        }
+
+        .pronosticgols {
+            text-align: center;
+            font-size: 11vw;
+            padding: 0px 10px 0 10px;
+            color: black;
+        }
+
+        .pronosticacabat {
+            background-color: white;
+            color: black;
+        }
+
+        .resultatlocal {
+            width: 50%;
+            float: left;
+            background-color: #CA0F2C;
+            text-align: center;
+            padding: 1%;
+        }
+
+        .resultatvisitant {
+            width: 50%;
+            float: left;
+            background-color: #CA0F2C;
+            text-align: center;
+            padding: 1%;
+        }
+
+        .resultatgols {
+            text-align: center;
+            font-size: 3em;
+        }
+
+        .caixaenviar {
+            text-align: center;
+        }
+
+        .botoenviar {
+            background-color: #F9D525;
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: black;
+        }
+
+        .imatgebackground {
+            background-image: url('escutsequips/Girona.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: auto;
+        }
+
+        .caixaescut {
+            background-color: #FFFFFF;
+            text-align: center;
+            padding: 1%;
+            border-radius: 5px;
+        }
+
+        .imatgeresponsive {
+            width: 75%;
+            max-width: 150px;
+            height: auto;
+        }
+
+        .imatgeajustada {
+            object-fit: contain;
+            text-align: center;
+            padding: 1%;
+            background-color: #CF1F30;
+        }
+
+        .barrahoritzontal {
+            border: 2px solid #FFFFFF;
+            border-radius: 5px;
+            float: left;
+            width: 100%;
+            background-color: black;
+        }
+
+        .barraseparadora {
+            border: 1px solid #FFFFFF;
+            border-radius: 2px;
+            float: left;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .nomequip {
+            text-align: center;
+            font-size: 1.1em;
+            color: white;
+        }
+
+        .titolgols {
+            text-align: center;
+            font-size: 1.4em;
+            color: white;
+        }
+
+        .colortitol {
+            color: #CA0F2C;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="color: #CA0F2C">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PorraGirona</a>
+                <!-- Canviem al clicar al titol va al home -->
+                <a class="navbar-brand" asp-controller="Puntuacions" asp-action="Index"> <font class="text-danger"> <b>Porra Girona</b></font></a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!--<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">-->
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <!-- apartat de Login -->
+                    <ul class="navbar-nav">
+                        @if (HttpContextAccessor.HttpContext.Session.GetString("alias") != null)
+                        {
+                            <li class="nav-item">
+                                <u><a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout:  <b>@HttpContextAccessor.HttpContext.Session.GetString("alias")</b></a></u>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                            </li>
+                        }
+                    </ul>
+                    <!-- Barra de menú -->
+                    <ul class="navbar-nav flex-grow-1">
+                        @{
+                            String rol = "";
+                            byte[] rolsessio = null;
+                            bool existeix = HttpContextAccessor.HttpContext.Session.TryGetValue("rol", out rolsessio);
+                            if (existeix) rol = System.Text.Encoding.UTF8.GetString(rolsessio);
+                            //Si és un usuari identificat amb sessió mostra els menús
+                            if ((rol.Equals("soci")) || (rol.Equals("admin")))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Puntuacions" asp-action="Index">Puntuacions</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> Privacitat</a>
+                            </li>
+                        }
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <!--Barra menú-->
                     <ul class="navbar-nav flex-grow-1">
@@ -41,14 +274,10 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - PorraGirona - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

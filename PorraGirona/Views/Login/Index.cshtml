@@ -1,0 +1,23 @@
+﻿@model PorraGirona.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Login</h2>
+@ViewBag.error
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.LabelFor(model => model.Alias) @Html.EditorFor(model => model.Alias)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Password) @Html.EditorFor(model => model.Password)
+    </div>
+
+    <div>
+        <input type="submit" value="Entrar" />
+    </div>
+}
