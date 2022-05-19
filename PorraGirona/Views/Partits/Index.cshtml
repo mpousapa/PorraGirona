@@ -31,7 +31,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Temporada)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Idsjugadorslocal)
             </th>
             <th>
@@ -42,7 +42,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdequipvisitantNavigation)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -67,7 +67,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Temporada)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Idsjugadorslocal)
             </td>
             <td>
@@ -78,7 +78,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdequipvisitantNavigation.Idequip)
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Idpartit">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Idpartit">Details</a> |
