@@ -31,6 +31,7 @@ namespace PorraGironaWeb.Controllers
             if (ModelState.IsValid)
             {
                 Penyiste penyista = null;
+                //Consulta per veure si existeix el penyista a la base de dades amb les dades que ens han entrat al formulari
                 try
                 {
                     penyista = _context.Penyistes.FirstOrDefault(penyista => penyista.Alias.ToLower() == model.Alias.ToLower() && penyista.Password == model.Password);
