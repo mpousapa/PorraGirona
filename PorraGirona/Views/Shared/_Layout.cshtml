@@ -247,28 +247,15 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> Privacitat</a>
                             </li>
-                        }
+                            if (rol.Equals("admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Partits" asp-action="Index">Partits</a>
+                                </li>
+                            }
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <!--Barra menú-->
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Puntuacions" asp-action="Index">Puntuacions</a>
-                        </li>
-                        
-                        <!--Partits-->
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Partits" asp-action="Index">Partits</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                        }
+</div>
         </nav>
     </header>
     <div class="container">
