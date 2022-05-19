@@ -116,7 +116,7 @@ namespace PorraGirona.Controllers
                         Puntuacion puntuacio = (Puntuacion)_context.Puntuacions.FromSqlRaw("SELECT * FROM puntuacions WHERE idpenyista = " + porra.Idpenyista);
                         puntuacio.Puntuacio += CalculaPuntuacioUtilitzantEntitatsAmbAlies(porra, partit);
 
-                        _context.Update(puntuacio);
+                        _context.Puntuacions.Update(puntuacio);
                     }
 
                     await _context.SaveChangesAsync();
@@ -198,7 +198,6 @@ namespace PorraGirona.Controllers
             else if (Math.Abs((double)(porra.Golslocal - partit.Golslocal)) <= 1 && Math.Abs((double)(porra.Golsvisitant - partit.Golsvisitant)) <= 1) puntuacio = 2;
 
             else puntuacio = 1;
-
 
             return puntuacio;
         }
