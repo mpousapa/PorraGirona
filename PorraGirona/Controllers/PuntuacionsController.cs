@@ -33,7 +33,6 @@ namespace PorraGirona.Controllers
                 return View(await _context.Puntuacions.OrderByDescending(p => p.Puntuacio).ToListAsync());
             }
             return RedirectToAction("Index", "Puntuacions");
-            
         }
 
         //Nivell Accés

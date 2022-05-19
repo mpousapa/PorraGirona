@@ -3,21 +3,60 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Login</h2>
-@ViewBag.error
+<style>
+    /* Estils al Login*/
+    body {
+        background-image: url("images/loginImage.jpg");
+        background-color: #EA6878;
+        height: 500px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-blend-mode:luminosity;
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    h2 {
+        color: white;
+    }
 
-    <div>
-        @Html.LabelFor(model => model.Alias) @Html.EditorFor(model => model.Alias)
-    </div>
-    <div>
-        @Html.LabelFor(model => model.Password) @Html.EditorFor(model => model.Password)
-    </div>
+    #bg-formulari {
+        margin: 100px auto;
+        width: fit-content;
+        min-width: fit-content;
+        padding: 20px 20px 30px;
+        border: 5px solid black;
+        border-radius: 30px;
+        background-color: #E91C35;
+    }
+    #boto {
+        /*Mirar que el boton quede centrado*/
+    }
 
-    <div>
-        <input type="submit" value="Entrar" />
-    </div>
-}
+</style>
+<div id="bg-formulari">
+    <h2>Login</h2>
+    @ViewBag.error
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div>
+            @Html.LabelFor(model => model.Alias) @Html.EditorFor(model => model.Alias)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Password) @Html.EditorFor(model => model.Password)
+        </div>
+
+        <div id="boto">
+            <input type="submit" value="Entrar" />
+        </div>
+
+        /*
+        <div>
+            <img class="imatge-aficio" src="images/loginImage.jpg" alt="Afició">
+        </div>*/
+    }
+
+</div>
