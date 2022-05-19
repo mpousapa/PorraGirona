@@ -11,18 +11,25 @@ namespace PorraGirona.Controllers
 {
     public class PartitsController : Controller
     {
-        private readonly PostDbContext _context;
+        //private readonly PostDbContext _context;
 
-        public PartitsController(PostDbContext context)
+        //public PartitsController(PostDbContext context)
+        //{
+        //    _context = context;
+        //}
+        PostDbContext _context;
+        public PartitsController()
         {
-            _context = context;
+            _context = new PostDbContext();
         }
+
 
         // GET: Partits
         public async Task<IActionResult> Index()
         {
-            var postDbContext = _context.Partits.Include(p => p.IdequiplocalNavigation).Include(p => p.IdequipvisitantNavigation);
-            return View(await postDbContext.ToListAsync());
+            //var postDbContext = _context.Partits.Include(p => p.IdequiplocalNavigation).Include(p => p.IdequipvisitantNavigation);
+            //return View(await postDbContext.ToListAsync());
+            return View(await _context.Partits.OrderBy(p => p.Jornada).ToListAsync());
         }
 
         // GET: Partits/Details/5
@@ -113,10 +120,10 @@ namespace PorraGirona.Controllers
 
                     foreach (Porre porra in porres)
                     {
-                        Puntuacion puntuacio = (Puntuacion)_context.Puntuacions.FromSqlRaw("SELECT * FROM puntuacions WHERE idpenyista = " + porra.Idpenyista);
-                        puntuacio.Puntuacio += CalculaPuntuacioUtilitzantEntitatsAmbAlies(porra, partit);
+                        List<Puntuacion> puntuacions = _context.Puntuacions.FromSqlRaw("SELECT * FROM puntuacions WHERE idpenyista = " + porra.Idpenyista).ToList();
+                        puntuacions.First().Puntuacio += CalculaPuntuacioUtilitzantEntitatsAmbAlies(porra, partit);
 
-                        _context.Puntuacions.Update(puntuacio);
+                        _context.Puntuacions.Update(puntuacions.First());
                     }
 
                     await _context.SaveChangesAsync();
