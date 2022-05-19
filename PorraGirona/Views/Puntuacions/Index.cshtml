@@ -21,7 +21,8 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Alias)
+                    <a asp-controller="PronPorres" asp-action="Index" asp-route-id="@item.Idpenyista">@Html.DisplayFor(modelItem => item.Alias)</a>
+                    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Puntuacio)

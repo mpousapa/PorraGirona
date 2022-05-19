@@ -26,10 +26,10 @@ namespace PorraGirona.Controllers
         }
 
         // GET: PronPorres
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
             // return View(await _context.PronPorres.ToListAsync());
-            int id = 10;
+            // int id = 10;
             string consulta = @"
                 SELECT por.idporra as id, par.jornada, par.datainici, loc.nom as local, vis.nom as visitant,
                     por.golslocal as predlocal, por.golsvisitant as predvisitant, par.golslocal, par.golsvisitant

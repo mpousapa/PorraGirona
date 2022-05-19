@@ -5,74 +5,76 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+
+    div#historic {
+        border: 1px solid black;
+        text-align: center;
+
+        width: 50%;
+        height: auto;
+    }
+
+    p#historic {
+        color: red;
+    }
+
+    div.pronostic {
+        border: 2px solid green;
+        background-color: red;
+        color: white;
+
+        display: block;
+        margin-bottom: 10px;
+
+        width: 100%;
+        height: auto;
+    }
+
+    div.info{
+        display: flex;
+    }
+
+    div.local, div.visitant, div.resultat {
+        width: 33%;
+        height: 100%;
+    }
+
+</style>
+
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Jornada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Datainici)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Local)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Visitant)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Predlocal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Predvisitant)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Golslocal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Golsvisitant)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Jornada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Datainici)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Local)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Visitant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Predlocal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Predvisitant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Golslocal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Golsvisitant)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<!--Html.DisplayNameFor(model => model.Jornada)-->
+<!--Html.DisplayFor(modelItem => item.Jornada)-->
+
+<div id="historic">
+    <p id="historic">Històric</p>
+
+    @foreach (var item in Model) {
+    <div class="pronostic">
+        <p id="jornada">Jornada @Html.DisplayFor(modelItem => item.Jornada)
+        - @Html.DisplayFor(modelItem => item.Datainici) 
+        </p>
+        
+        <div class="info">
+            <div class="local">
+                <p>@Html.DisplayFor(modelItem => item.Local)</p>
+            </div>
+
+            <div class="resultat">
+                <p>Pronòstic</p>
+                <p>___________________</p>
+                <p>Resultat</p>
+            </div>
+
+            <div class="visitant">
+                <p>@Html.DisplayFor(modelItem => item.Visitant)</p>
+            </div>
+        </div>
+    </div>    
+
+    }
+</div>
