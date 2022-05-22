@@ -4,30 +4,74 @@
     ViewData["Title"] = "Puntuacions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<style>
+    /* Estils a Puntuacions*/
+    body {
+        background-image: url("images/puntuacions.jpg");
+
+        background-color: #EA6878;
+        background-position: center;
+        background-size: cover;
+        background-blend-mode: luminosity;
+    }
+
+    h1 {
+        color: white;
+    }
+
+    .contenidor {
+        margin-left: 25%;
+        padding: 50px;
+        background-image: url("images/papiro_955.png");
+
+        width: fit-content;
+        height: 955px;
+
+    }
+
+    .table {
+        color: black;
+        width: 200px;
+        margin-top: 20px;
+        margin-bottom: 0px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .centrar {
+        text-align: center;
+    }
+
+</style>
+
 <h1>Puntuacions</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Alias)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Puntuacio)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="contenidor">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Alias)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Puntuacio)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Alias)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Puntuacio)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Alias)
+                    </td>
+                    <td class="centrar">
+                        @Html.DisplayFor(modelItem => item.Puntuacio)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
