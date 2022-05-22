@@ -12,7 +12,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        background-blend-mode:luminosity;
+        background-blend-mode: luminosity;
     }
 
     h2 {
@@ -28,11 +28,38 @@
         border-radius: 30px;
         background-color: #E91C35;
     }
-    #boto {
-        /*Mirar que el boton quede centrado*/
+
+    .etiqueta {
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .dreta {
+        float: right;
+        margin-left: 10px;
+    }
+
+    .centrar {
+        margin-top: 20px;
+        width: max-content;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .boto {
+        height: 40px;
+        width: 100px;
+        font-size: 20px;
+    }
+
+    .boto:hover {
+        border: 2px solid black;
+        background-color: #EA6878;
+        color: white;
     }
 
 </style>
+
 <div id="bg-formulari">
     <h2>Login</h2>
     @ViewBag.error
@@ -41,22 +68,23 @@
     {
         @Html.AntiForgeryToken()
 
-
-        <div>
-            @Html.LabelFor(model => model.Alias) @Html.EditorFor(model => model.Alias)
+        <div class="etiqueta">
+            @Html.LabelFor(model => model.Alias)
+            <div class="dreta">
+                @Html.EditorFor(model => model.Alias)
+            </div> 
         </div>
-        <div>
-            @Html.LabelFor(model => model.Password) @Html.EditorFor(model => model.Password)
+        <div class="etiqueta">
+            @Html.LabelFor(model => model.Password)
+            <div class="dreta">
+                @Html.EditorFor(model => model.Password)
+            </div>
         </div>
 
-        <div id="boto">
-            <input type="submit" value="Entrar" />
+        <div class="centrar">
+            <input class="boto" type="submit" value="Entrar" />
         </div>
 
-        /*
-        <div>
-            <img class="imatge-aficio" src="images/loginImage.jpg" alt="Afició">
-        </div>*/
     }
 
 </div>
