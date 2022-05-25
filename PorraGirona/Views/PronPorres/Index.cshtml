@@ -8,7 +8,6 @@
 <style>
 
     div#historic {
-        border: 1px solid black;
         text-align: center;
 
         width: 50%;
@@ -19,8 +18,7 @@
         color: red;
     }
 
-    div.pronostic {
-        border: 2px solid green;
+    div.bloc {
         background-color: red;
         color: white;
 
@@ -35,18 +33,36 @@
         display: flex;
     }
 
-    div.local, div.visitant, div.resultat {
+    div.local, div.visitant, div.marcador {
         width: 33%;
         height: 100%;
     }
 
+    p.pronostic {
+        display: inline;
+        background-color: white;
+        color: black;
+        font-size: 3em;
+
+        margin: 0px 10px 0px 5px;
+        padding: 0px 5px 0px 5px
+    }
+
+    p.resultat {
+        background-color: red;
+        color: white;
+    }
+
 </style>
 
-<h1>Index</h1>
+<h1>Pronòstics de Porres</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+<!--
+    <a asp-action="Create">Create New</a> 
+-->
 </p>
+
 <!--Html.DisplayNameFor(model => model.Jornada)-->
 <!--Html.DisplayFor(modelItem => item.Jornada)-->
 
@@ -54,7 +70,7 @@
     <p id="historic">Històric</p>
 
     @foreach (var item in Model) {
-    <div class="pronostic">
+    <div class="bloc">
         <p id="jornada">Jornada @Html.DisplayFor(modelItem => item.Jornada)
         - @Html.DisplayFor(modelItem => item.Datainici) 
         </p>
@@ -64,9 +80,13 @@
                 <p>@Html.DisplayFor(modelItem => item.Local)</p>
             </div>
 
-            <div class="resultat">
+            <div class="marcador">
                 <p>Pronòstic</p>
+                    <p class="pronostic">@Html.DisplayFor(modelItem => item.Predlocal)</p>
+                    <p class="pronostic">@Html.DisplayFor(modelItem => item.Predvisitant)</p>
                 <p>___________________</p>
+                    <p class="pronostic resultat">@Html.DisplayFor(modelItem => item.Golslocal)</p>
+                    <p class="pronostic resultat">@Html.DisplayFor(modelItem => item.Golsvisitant)</p>
                 <p>Resultat</p>
             </div>
 
