@@ -32,7 +32,8 @@ namespace PorraGirona.Controllers
             // int id = 10;
             string consulta = @"
                 SELECT por.idporra as id, par.jornada, par.datainici, loc.nom as local, vis.nom as visitant,
-                    por.golslocal as predlocal, por.golsvisitant as predvisitant, par.golslocal, par.golsvisitant
+                    por.golslocal as predlocal, por.golsvisitant as predvisitant, par.golslocal, par.golsvisitant,
+                    loc.imatge as escutlocal, vis.imatge as escutvisitant
                 FROM porres por
                   JOIN partits par ON (por.idpartit = par.idpartit)
                   JOIN equips loc ON (par.idequiplocal = loc.idequip)

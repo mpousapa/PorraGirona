@@ -77,6 +77,11 @@
         
         <div class="info">
             <div class="local">
+                @{
+                    var base64 = Convert.ToBase64String(item.Escutlocal);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <img src="@imgSrc"/>
                 <p>@Html.DisplayFor(modelItem => item.Local)</p>
             </div>
 
@@ -91,6 +96,11 @@
             </div>
 
             <div class="visitant">
+                @{
+                    var base64_2 = Convert.ToBase64String(item.Escutvisitant);
+                    var imgSrc_2 = String.Format("data:image/gif;base64,{0}", base64_2);
+                }
+                <img src="@imgSrc_2"/>
                 <p>@Html.DisplayFor(modelItem => item.Visitant)</p>
             </div>
         </div>

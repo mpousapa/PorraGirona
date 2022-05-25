@@ -26,5 +26,8 @@ namespace PorraGirona.Models.Entity
         public int? Golslocal { get; set; }
 
         public int? Golsvisitant { get; set; }
+
+        public byte[] Escutlocal { get; set; }
+        public byte[] Escutvisitant { get; set; }
     }
 }
