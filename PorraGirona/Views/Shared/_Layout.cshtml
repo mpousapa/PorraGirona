@@ -247,11 +247,15 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> Privacitat</a>
                             </li>
-                        }
+                            if (rol.Equals("admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Partits" asp-action="Index">Partits</a>
+                                </li>
+                            }
 
-                    </ul>
-                </div>
-            </div>
+                        }
+</div>
         </nav>
     </header>
     <div class="container">

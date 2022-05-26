@@ -1,0 +1,130 @@
+﻿@model PorraGirona.Models.Entity.Partit
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background-color: #EA6878;
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-blend-mode: luminosity;
+    }
+
+    .bg-taula {
+        color: white;
+        margin-top: 20px;
+        margin-bottom: 0px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        width: fit-content;
+        min-width: fit-content;
+        padding: 20px 20px 30px;
+        border: 5px solid black;
+        border-radius: 30px;
+        background-color: #E91C35;
+    }
+
+    .boto {
+        height: 40px;
+        width: 100px;
+        font-size: 20px;
+    }
+
+    .boto:hover {
+        border: 2px solid black;
+        background-color: #EA6878;
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    a:hover {
+        color: black;
+        border: 1px solid black;
+    }
+
+</style>
+
+<div class="bg-taula">
+    <h1>Delete</h1>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Partit</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Datainici)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Datainici)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Jornada)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Jornada)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Golslocal)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Golslocal)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Golsvisitant)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Golsvisitant)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Finalitzat)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Finalitzat)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Temporada)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Temporada)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Idsjugadorslocal)
+            </dt>
+            <dd class = "col-sm-12">
+                @Html.DisplayFor(model => model.Idsjugadorslocal)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Idsjugadorsvisitant)
+            </dt>
+            <dd class = "col-sm-12">
+                @Html.DisplayFor(model => model.Idsjugadorsvisitant)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.IdequiplocalNavigation)
+            </dt>
+            <dd class = "col-sm-12">
+                @Html.DisplayFor(model => model.IdequiplocalNavigation.Idequip)
+            </dd class>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.IdequipvisitantNavigation)
+            </dt>
+            <dd class = "col-sm-12">
+                @Html.DisplayFor(model => model.IdequipvisitantNavigation.Idequip)
+            </dd class>
+        </dl>
+    
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Idpartit" />
+            <input type="submit" value="Delete" class="boto" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</div>

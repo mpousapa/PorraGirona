@@ -1,0 +1,125 @@
+﻿@model PorraGirona.Models.Entity.Partit
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #EA6878;
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-blend-mode: luminosity;
+    }
+
+    .bg-taula {
+        color: white;
+        margin-top: 20px;
+        margin-bottom: 0px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        width: fit-content;
+        min-width: fit-content;
+        padding: 20px 100px 30px;
+        border: 5px solid black;
+        border-radius: 30px;
+        background-color: #E91C35;
+    }
+
+    .boto {
+        height: 40px;
+        width: 100px;
+        font-size: 20px;
+    }
+
+        .boto:hover {
+            border: 2px solid black;
+            background-color: #EA6878;
+            color: white;
+        }
+
+    a {
+        color: white;
+    }
+
+        a:hover {
+            color: black;
+            border: 1px solid black;
+        }
+</style>
+
+<div class="bg-taula">
+    <h1>Create</h1>
+
+    <h4>Partit</h4>
+    <hr />
+    <div class="row">
+        <div>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Idequiplocal" class="control-label"></label>
+                    <select asp-for="Idequiplocal" class ="form-control" asp-items="ViewBag.Idequiplocal"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Idequipvisitant" class="control-label"></label>
+                    <select asp-for="Idequipvisitant" class ="form-control" asp-items="ViewBag.Idequipvisitant"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Datainici" class="control-label"></label>
+                    <input asp-for="Datainici" class="form-control" />
+                    <span asp-validation-for="Datainici" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Jornada" class="control-label"></label>
+                    <input asp-for="Jornada" class="form-control" />
+                    <span asp-validation-for="Jornada" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Golslocal" class="control-label"></label>
+                    <input asp-for="Golslocal" class="form-control" />
+                    <span asp-validation-for="Golslocal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Golsvisitant" class="control-label"></label>
+                    <input asp-for="Golsvisitant" class="form-control" />
+                    <span asp-validation-for="Golsvisitant" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Finalitzat" class="control-label"></label>
+                    <input asp-for="Finalitzat" class="form-control" />
+                    <span asp-validation-for="Finalitzat" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Temporada" class="control-label"></label>
+                    <input asp-for="Temporada" class="form-control" />
+                    <span asp-validation-for="Temporada" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Idsjugadorslocal" class="control-label"></label>
+                    <input asp-for="Idsjugadorslocal" class="form-control" />
+                    <span asp-validation-for="Idsjugadorslocal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Idsjugadorsvisitant" class="control-label"></label>
+                    <input asp-for="Idsjugadorsvisitant" class="form-control" />
+                    <span asp-validation-for="Idsjugadorsvisitant" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="boto" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

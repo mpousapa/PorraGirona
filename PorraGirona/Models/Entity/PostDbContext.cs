@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using PorraGirona.Models.Entity;
 
 #nullable disable
 
@@ -339,5 +340,7 @@ namespace PorraGirona.Models.Entity
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<PorraGirona.Models.Entity.PronPorres> PronPorres { get; set; }
     }
 }

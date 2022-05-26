@@ -9,51 +9,44 @@ using PorraGirona.Models.Entity;
 
 namespace PorraGirona.Controllers
 {
-    public class PuntuacionsController : Controller
+    public class PronPorresController : Controller
     {
-        /* Modificat per Miquel Pouu
+        /*
         private readonly PostDbContext _context;
 
-        public PuntuacionsController(PostDbContext context)
+        public PronPorresController(PostDbContext context)
         {
             _context = context;
         }
         */
         PostDbContext _context;
-        public PuntuacionsController()
+        public PronPorresController()
         {
             _context = new PostDbContext();
         }
 
-        // GET: Puntuacions
-        public async Task<IActionResult> Index()
+        // GET: PronPorres
+        public async Task<IActionResult> Index(int id)
         {
-            if (NivellAcces() <= 5)
-            {
-                return View(await _context.Puntuacions.OrderByDescending(p => p.Puntuacio).ToListAsync());
-            }
-            return RedirectToAction("Index", "Puntuacions");
+            // return View(await _context.PronPorres.ToListAsync());
+            // int id = 10;
+            string consulta = @"
+                SELECT por.idporra as id, par.jornada, par.datainici, loc.nom as local, vis.nom as visitant,
+                    por.golslocal as predlocal, por.golsvisitant as predvisitant, par.golslocal, par.golsvisitant,
+                    loc.imatge as escutlocal, vis.imatge as escutvisitant
+                FROM porres por
+                  JOIN partits par ON (por.idpartit = par.idpartit)
+                  JOIN equips loc ON (par.idequiplocal = loc.idequip)
+                  JOIN equips vis ON (par.idequipvisitant = vis.idequip)
+                WHERE idpenyista = " + id;
+
+            List<PronPorres> pronostics = _context.PronPorres.FromSqlRaw(consulta).ToList();
+            var pronostics_task = await Task.Run(() => pronostics);
+
+            return View(pronostics_task);
         }
 
-        //Nivell Accés
-        private int NivellAcces()
-        {
-            int nivell = 10;
-
-            String rol;
-            byte[] valor = null;
-            bool existeix = HttpContext.Session.TryGetValue("rol", out valor);
-            if (valor != null)
-            {
-                rol = System.Text.Encoding.UTF8.GetString(valor);
-                if (rol == "admin")
-                    nivell = 0;
-                if (rol == "soci")
-                    nivell = 5;
-            }
-            return nivell;
-        }
-        // GET: Puntuacions/Details/5
+        // GET: PronPorres/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -61,39 +54,39 @@ namespace PorraGirona.Controllers
                 return NotFound();
             }
 
-            var puntuacion = await _context.Puntuacions
-                .FirstOrDefaultAsync(m => m.Idpuntuacio == id);
-            if (puntuacion == null)
+            var pronPorres = await _context.PronPorres
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (pronPorres == null)
             {
                 return NotFound();
             }
 
-            return View(puntuacion);
+            return View(pronPorres);
         }
 
-        // GET: Puntuacions/Create
+        // GET: PronPorres/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Puntuacions/Create
+        // POST: PronPorres/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idpuntuacio,Idpenyista,Alias,Puntuacio,Temporada")] Puntuacion puntuacion)
+        public async Task<IActionResult> Create([Bind("Id,Jornada,Datainici,Local,Visitant,Predlocal,Predvisitant,Golslocal,Golsvisitant")] PronPorres pronPorres)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(puntuacion);
+                _context.Add(pronPorres);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(puntuacion);
+            return View(pronPorres);
         }
 
-        // GET: Puntuacions/Edit/5
+        // GET: PronPorres/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -101,22 +94,22 @@ namespace PorraGirona.Controllers
                 return NotFound();
             }
 
-            var puntuacion = await _context.Puntuacions.FindAsync(id);
-            if (puntuacion == null)
+            var pronPorres = await _context.PronPorres.FindAsync(id);
+            if (pronPorres == null)
             {
                 return NotFound();
             }
-            return View(puntuacion);
+            return View(pronPorres);
         }
 
-        // POST: Puntuacions/Edit/5
+        // POST: PronPorres/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idpuntuacio,Idpenyista,Alias,Puntuacio,Temporada")] Puntuacion puntuacion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Jornada,Datainici,Local,Visitant,Predlocal,Predvisitant,Golslocal,Golsvisitant")] PronPorres pronPorres)
         {
-            if (id != puntuacion.Idpuntuacio)
+            if (id != pronPorres.Id)
             {
                 return NotFound();
             }
@@ -125,12 +118,12 @@ namespace PorraGirona.Controllers
             {
                 try
                 {
-                    _context.Update(puntuacion);
+                    _context.Update(pronPorres);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PuntuacionExists(puntuacion.Idpuntuacio))
+                    if (!PronPorresExists(pronPorres.Id))
                     {
                         return NotFound();
                     }
@@ -141,10 +134,10 @@ namespace PorraGirona.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(puntuacion);
+            return View(pronPorres);
         }
 
-        // GET: Puntuacions/Delete/5
+        // GET: PronPorres/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -152,30 +145,30 @@ namespace PorraGirona.Controllers
                 return NotFound();
             }
 
-            var puntuacion = await _context.Puntuacions
-                .FirstOrDefaultAsync(m => m.Idpuntuacio == id);
-            if (puntuacion == null)
+            var pronPorres = await _context.PronPorres
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (pronPorres == null)
             {
                 return NotFound();
             }
 
-            return View(puntuacion);
+            return View(pronPorres);
         }
 
-        // POST: Puntuacions/Delete/5
+        // POST: PronPorres/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var puntuacion = await _context.Puntuacions.FindAsync(id);
-            _context.Puntuacions.Remove(puntuacion);
+            var pronPorres = await _context.PronPorres.FindAsync(id);
+            _context.PronPorres.Remove(pronPorres);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PuntuacionExists(int id)
+        private bool PronPorresExists(int id)
         {
-            return _context.Puntuacions.Any(e => e.Idpuntuacio == id);
+            return _context.PronPorres.Any(e => e.Id == id);
         }
     }
 }

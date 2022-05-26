@@ -36,7 +36,7 @@ namespace PorraGironaWeb.Controllers
                 {
                     penyista = _context.Penyistes.FirstOrDefault(penyista => penyista.Alias.ToLower() == model.Alias.ToLower() && penyista.Password == model.Password);
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
 
                 if (penyista != null)
                 {
