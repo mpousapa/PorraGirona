@@ -1,0 +1,79 @@
+﻿@model PorraGirona.Models.Entity.Partit
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Partit</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Datainici)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Datainici)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Jornada)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Jornada)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Golslocal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Golslocal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Golsvisitant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Golsvisitant)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Finalitzat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Finalitzat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Temporada)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Temporada)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Idsjugadorslocal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Idsjugadorslocal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Idsjugadorsvisitant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Idsjugadorsvisitant)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdequiplocalNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdequiplocalNavigation.Idequip)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdequipvisitantNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdequipvisitantNavigation.Idequip)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Idpartit">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

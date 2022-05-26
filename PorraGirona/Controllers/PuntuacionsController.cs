@@ -28,9 +28,32 @@ namespace PorraGirona.Controllers
         // GET: Puntuacions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Puntuacions.OrderByDescending(p => p.Puntuacio).ToListAsync());
+            if (NivellAcces() <= 5)
+            {
+                return View(await _context.Puntuacions.OrderByDescending(p => p.Puntuacio).ToListAsync());
+            }
+            return RedirectToAction("Index", "Puntuacions");
+            
         }
 
+        //Nivell Accés
+        private int NivellAcces()
+        {
+            int nivell = 10;
+
+            String rol;
+            byte[] valor = null;
+            bool existeix = HttpContext.Session.TryGetValue("rol", out valor);
+            if (valor != null)
+            {
+                rol = System.Text.Encoding.UTF8.GetString(valor);
+                if (rol == "admin")
+                    nivell = 0;
+                if (rol == "soci")
+                    nivell = 5;
+            }
+            return nivell;
+        }
         // GET: Puntuacions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
