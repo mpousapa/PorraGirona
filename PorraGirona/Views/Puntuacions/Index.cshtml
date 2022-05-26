@@ -41,6 +41,10 @@
     .centrar {
         text-align: center;
     }
+    
+    a {
+        color: black;
+    }
 
 </style>
 
@@ -62,7 +66,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Alias)
+                        <a asp-controller="PronPorres" asp-action="Index" asp-route-id="@item.Idpenyista">@Html.DisplayFor(modelItem => item.Alias)</a>
                     </td>
                     <td class="centrar">
                         @Html.DisplayFor(modelItem => item.Puntuacio)
